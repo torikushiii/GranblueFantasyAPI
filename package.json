@@ -1,0 +1,29 @@
+{
+  "name": "GranblueFantasyAPI",
+  "version": "1.0.0",
+  "description": "API that provides most of the data from the game Granblue Fantasy",
+  "module": "index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0"
+  },
+  "author": "torikushiii",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/eslint-parser": "^7.19.1",
+    "bun-types": "^0.4.0",
+    "eslint": "^8.33.0",
+    "eslint-plugin-unicorn": "^45.0.2"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.2.0",
+    "@fastify/sensible": "^5.2.0",
+    "fastify": "^4.12.0",
+    "got": "^12.5.3",
+    "ioredis": "^5.3.0",
+    "mongodb": "^5.0.1",
+    "pino": "^8.9.0",
+    "pino-pretty": "^9.1.1"
+  }
+}
