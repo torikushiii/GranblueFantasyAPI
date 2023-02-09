@@ -20,7 +20,7 @@ module.exports = class UtilsSingleton extends require("./template") {
 		if (UtilsSingleton.version) {
 			return {
 				error: false,
-				version: UtilsSingleton.version
+				build: UtilsSingleton.version
 			};
 		}
 
@@ -65,5 +65,9 @@ module.exports = class UtilsSingleton extends require("./template") {
 		}
 
 		return Boolean(Number.isFinite(input) && Math.trunc(input) === input && input >= minLimit);
+	}
+
+	removeHTML (string) {
+		return string.replace(/<\s*br.*?>/g, "\n").replace(/<(.*?)>/g, "");
 	}
 };
