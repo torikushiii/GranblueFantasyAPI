@@ -9,6 +9,10 @@
   },
   "author": "torikushiii",
   "license": "AGPL-3.0",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
