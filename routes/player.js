@@ -13,6 +13,9 @@ module.exports = function (fastify, opts, done) {
 		else if (userData.error && userData.internal) {
 			return res.internalServerError(userData.message);
 		}
+		else if (userData.error === "no-match") {
+			return res.notFound("No player found with that id");
+		}
 
 		return res.send(userData.data);
 	});
