@@ -3,10 +3,13 @@ module.exports = function (fastify, opts, done) {
 
 	Router.get("/", async (req, res) => res.badRequest("No player id provided"));
 
-	Router.get("/:id", async (req, res) => {
-		const { id } = req.params;
+	Router.get("/:user", async (req, res) => {
+		const isId = req.query.id === "true";
+		if (!isId) {
+			return res.badRequest("At this time, only player ids are supported, append ?id=true to your request");
+		}
 
-		const userData = await app.internal.Player.getPlayer(id);
+		const userData = await app.internal.Player.getPlayer(req.params.user);
 		if (userData.error && !userData.internal) {
 			return res.badRequest(userData.message);
 		}
