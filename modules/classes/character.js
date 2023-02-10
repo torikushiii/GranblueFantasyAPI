@@ -131,10 +131,14 @@ module.exports = class Character extends require("./template") {
 			let charData;
 			if (dbCharaData) {
 				charData = new Character(dbCharaData);
+
+				await this.populateCaches(dbCharaData);
+
+				return charData;
 			}
 			else if (options.force) {
 				const fetchData = await app.internal.Character.get(target, { id: true });
-				if (fetchData.error) {
+				if (!fetchData) {
 					return null;
 				}
 
@@ -148,18 +152,6 @@ module.exports = class Character extends require("./template") {
 			else {
 				return null;
 			}
-
-			const fetchData = await app.internal.Character.get(target);
-			if (fetchData.error) {
-				return null;
-			}
-
-			charData = new Character(fetchData);
-
-			await app.Query.collection("character_data").insertOne(fetchData);
-			await this.populateCaches(fetchData);
-
-			return charData;
 		}
 	}
 
@@ -179,18 +171,18 @@ module.exports = class Character extends require("./template") {
 
 	static getByProperty (property, identifier) {
 		const iterator = Character.data.values();
-		let target = null;
+		let character = undefined;
 		let value = iterator.next().value;
 
-		while (!target && value) {
+		while (!character && value) {
 			if (value[property] === identifier) {
-				target = value;
+				character = value;
 			}
 
 			value = iterator.next().value;
 		}
 
-		return target;
+		return character;
 	}
 
 	static ultimate (ultimate) {
@@ -216,7 +208,7 @@ module.exports = class Character extends require("./template") {
 					description: app.Utils.removeHTML(ability.comment),
 					cooldown: Number(ability.recast),
 					readyIn: Number(ability.start_recast),
-					details: ability.ability_detail ? this.getAbilityDetails(ability.ability_detail) : []
+					details: (ability.ability_detail.length !== 0) ? this.getAbilityDetails(ability.ability_detail) : null
 				});
 			}
 		}
