@@ -70,4 +70,9 @@ module.exports = class UtilsSingleton extends require("./template") {
 	removeHTML (string) {
 		return string.replace(/<\s*br.*?>/g, "\n").replace(/<(.*?)>/g, "");
 	}
+
+	cheerio (html) {
+		const cheerio = require("cheerio");
+		return cheerio.load(html);
+	}
 };
