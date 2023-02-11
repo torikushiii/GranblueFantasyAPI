@@ -5,10 +5,12 @@ const logger = require("./lib/logger");
 	require("./db-access.js");
 	await require("./modules/index")();
 	const subroutes = [
-		"player",
+		"banner",
 		"character",
 		"events",
-		"gacha"
+		"player",
+		"summon",
+		"weapon"
 	];
 
 	const config = app.Config;
