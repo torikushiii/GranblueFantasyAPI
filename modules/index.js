@@ -15,14 +15,16 @@ module.exports = (async function (options = {}) {
 		"internal/account",
 		"internal/gacha",
 		"internal/character",
+		"internal/summon",
+		"internal/weapon",
 
 		"singleton/utils",
 		"singleton/cache",
 		"singleton/query",
 
-		"classes/character"
-		// "classes/summon",
-		// "classes/weapon"
+		"classes/character",
+		"classes/summon",
+		"classes/weapon"
 	];
 
 	const {
@@ -89,6 +91,18 @@ module.exports = (async function (options = {}) {
 				case "character": {
 					const Component = require("./internal/character");
 					app.internal.Character = Component.singleton();
+					break;
+				}
+
+				case "summon": {
+					const Component = require("./internal/summon");
+					app.internal.Summon = Component.singleton();
+					break;
+				}
+
+				case "weapon": {
+					const Component = require("./internal/weapon");
+					app.internal.Weapon = Component.singleton();
 					break;
 				}
 			}
